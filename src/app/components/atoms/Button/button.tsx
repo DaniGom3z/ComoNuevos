@@ -1,24 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-interface ButtonProps {
-  onClick: () => void;
+type ButtonProps = {
   className?: string;
   text: string;
-}
+};
 
-function Button(props: ButtonProps) {
+const Button: React.FC<ButtonProps> = ({ className, text }) => {
+  const handleClick = () => {
+    // Coloca aquí la lógica del controlador de eventos de clic
+    // Por ejemplo: console.log('Botón clicado');
+  };
+
   return (
-    <button onClick={props.onClick} className={props.className}>
-      {props.text}
+    <button className={className}>
+      {text}
     </button>
   );
-}
-
-Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  className: PropTypes.string, 
-  text: PropTypes.string.isRequired,
 };
 
 export default Button;

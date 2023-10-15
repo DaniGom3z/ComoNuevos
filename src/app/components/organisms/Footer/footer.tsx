@@ -4,10 +4,10 @@ import Link from "next/link";
 function Footer() {
   return (
     <div>
-      <footer className="footer p-10 bg-black text-white">
+      <footer className="footer p-20 bg-black text-white">
         <nav>
           <header className="footer-title">Servicios</header>
-          <a className="link link-hover">Venta de autos</a>
+          <Link href="/" className="link link-hover">Venta de autos</Link>
         </nav>
         <nav>
           <header className="footer-title">Compañia</header>
