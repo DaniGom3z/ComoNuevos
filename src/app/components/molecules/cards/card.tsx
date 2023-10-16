@@ -13,10 +13,10 @@ interface CardsProps {
 const Cards: React.FC<CardsProps> = ({ buttonText, priceText, imageSrc,name }) => {
 
   return (
-    <div className='bg-slate-400 w-64 h-96 mb-2 rounded ml-10 relative mt-6'>
+    <div className='bg-neutral-300 w-64 h-96 mb-6 rounded ml-10 relative mt-6 hover:scale-105 ease-in duration-200 hover:rounded-none'>
       <img src={imageSrc} alt={priceText} className='w-64 h-48 object-cover rounded-t ' />
       <div className="p-3">
-      <Title name={name} className='text-white text-3xl'/>
+      <Title name={name} className='text-black text-3xl font-bold'/>
         <Title name={priceText} className='text-black text-2xl'/>
       </div>
       <div className='float-right mt-10 mr-5'>

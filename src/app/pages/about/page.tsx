@@ -7,7 +7,7 @@ export default function Home() {
 
 
       <div >
-       <h1>HOLAAAAAA</h1>
+       <h1 className="text-white">HOLAAAAAA</h1>
       </div>
 
     </main>

@@ -4,7 +4,7 @@ import Footer from "./components/organisms/Footer/footer"
 import Car from "./components/organisms/Cars/cards"
 
 export default function Home() {
-  const bannerUrl = '/Inicio.jpg'
+  const bannerUrl = '/inicio2.jpg'
   return (
    <>
     <Header/>
