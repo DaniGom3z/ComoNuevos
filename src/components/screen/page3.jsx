@@ -3,7 +3,7 @@ import ThirdPage from '../templates/thirdPage'
 const page3 = () => {
   return (
    <>
-   <ThirdPage/>>
+   <ThirdPage/>
    </>
   )
 }

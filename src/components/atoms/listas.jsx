@@ -1,9 +1,9 @@
 import React from 'react'
 
-const listas = ({lista,s}) => {
+const listas = ({lista,style}) => {
   return (
     <>
-    <li className="text-white font-medium text-sm cursor-pointer">{lista}</li>
+    <li className={style}>{lista}</li>
     </>
   )
 }

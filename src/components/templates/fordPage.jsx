@@ -9,8 +9,9 @@ const FordPage = () => {
   return (
     <>
        <Header/>
-    <div className='position relative -top-20 banner shadow shadow-black'>
-         <Banner style="w-screen img absolute" image={Img3}/>
+    <div className='position relative -top-20 banner '>
+         <Banner style="img absolute" image={Img3}/>
+         <div className='image-overlay'></div>
       </div>
       <div className='relative p-10'>
          <Cards 

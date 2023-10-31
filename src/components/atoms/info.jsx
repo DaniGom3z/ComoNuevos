@@ -4,7 +4,6 @@ const info = ({text,styles}) => {
   return (
     <>
     <p className={styles}>{text}</p>
-    
     </>
   )
 }
