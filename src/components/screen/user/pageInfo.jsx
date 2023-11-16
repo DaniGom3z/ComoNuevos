@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Img from '../atoms/img'
-import Header from '../oraganisms/header'
-import Title from '../atoms/title'
-import Info from '../atoms/info'
-import Button from '../atoms/button'
+import Img from '../../atoms/img'
+import Header from '../../oraganisms/header'
+import Title from '../../atoms/title'
+import Info from '../../atoms/info'
+import Button from '../../atoms/button'
 import { Link } from 'react-router-dom';
 const PageInfo = () => {
   const location = useLocation();

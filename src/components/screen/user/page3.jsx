@@ -1,5 +1,5 @@
 import React from 'react'
-import ThirdPage from '../templates/thirdPage'
+import ThirdPage from '../../templates/thirdPage'
 const page3 = () => {
   return (
    <>

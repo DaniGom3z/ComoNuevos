@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Navbar from '../molecules/navbar'
 import Title from '../atoms/title'
-
+import IniciarSesion from '../atoms/sesion'
 const Header = () => {
     const [scrolling, setScrolling] = useState(false);
 
@@ -55,6 +55,12 @@ const Header = () => {
         <Navbar
         style="z-10"
         />
+        <div className='z-10'>
+        <IniciarSesion
+        style="text-white font-semibold first-letter:text-red-500"
+        link="/inicio"
+        />
+        </div>
       </header>
     );
 }

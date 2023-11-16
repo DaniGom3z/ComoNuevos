@@ -8,7 +8,9 @@ const FordPage = () => {
     const [carro,setCarro]=useState(data4)
   return (
     <>
-       <Header/>
+        <div className='fixed z-20 w-screen'>
+         <Header />  
+         </div>
     <div className='position relative -top-20 banner '>
          <Banner style="img absolute" image={Img3}/>
          <div className='image-overlay'></div>

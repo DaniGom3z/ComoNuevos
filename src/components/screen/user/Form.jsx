@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../oraganisms/header'
-import Button from '../atoms/button'
+import Header from '../../oraganisms/header'
+import Button from '../../atoms/button'
 const Form = () => {
   return (
     <>

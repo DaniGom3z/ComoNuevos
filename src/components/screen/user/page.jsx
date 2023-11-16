@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeScreen from '../templates/homeScreen'
+import HomeScreen from '../../templates/homeScreen'
 const page = () => {
   return (
     <>
