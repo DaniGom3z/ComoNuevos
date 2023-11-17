@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react'
 import Navbar from '../molecules/navbar'
 import Title from '../atoms/title'
 import IniciarSesion from '../atoms/sesion'
+import { Link } from 'react-router-dom'
+
 const Header = () => {
     const [scrolling, setScrolling] = useState(false);
 
@@ -47,11 +49,15 @@ const Header = () => {
     return (
       <header className={`flex justify-around items-center relative z-10`} style={headerStyle}>
         <div style={backgroundStyle}></div>
+        <div className='z-10 w-fit h-fit'>
+        <Link to="/">
         <Title
-          styles={`text-white font-semibold first-letter:text-red-500 z-10`}
+          styles={`text-white font-semibold first-letter:text-red-500`}
           text="ComoNuevo"
           style={titleStyle}
-        />
+          />
+          </Link>
+          </div>
         <Navbar
         style="z-10"
         />

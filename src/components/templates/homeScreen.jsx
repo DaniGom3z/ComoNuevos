@@ -52,7 +52,7 @@ useEffect(() => {
          <Banner style="img absolute" image={img2}/>
          <div className='image-overlay'></div>
          </div>
-          <div className='relative -top-20 z-10'>
+          <div className='relative z-10 top-20'>
          <Cards 
          carro={carro}
          />

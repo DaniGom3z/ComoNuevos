@@ -38,8 +38,25 @@
 #abrir{
   display: block;
 }
+.abrir{
+  animation: mover 300ms infinite alternate ease-in-out;
+}
+.cerrar{
+  animation: mover 300ms infinite alternate ease-in-out;
+ 
+}
+
+@keyframes mover{
+  from{
+    transform:translateY(2px);
+  }to{
+    transform:translateY(-2px);
+   
+  }
+}
 .hide{
   position: relative;
+  
   left:0;
   opacity: 0;
   transition: all 1.5s ease;

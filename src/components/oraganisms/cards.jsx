@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '../molecules/card'
 import Img from '../atoms/img'
-import flecha from '../../img/flecha-hacia-abajo.png'
+import flecha from '../../img/tomar.png'
 const Cards = ({carro}) => {
 const mostrar=()=>{
   document.getElementById('cards').style.height = '32rem'
@@ -22,11 +22,11 @@ const ocultar=()=>{
       <button className='bottom-0 absolute left-2/4 z-10 abrir op' onClick={mostrar}>
       <Img 
       id="abrir"
-      style=" w-5 h-5"
+      style=" w-10 h-10"
       image={flecha}
       />
       </button>
-      <div id='cards' className='flex justify-around flex-wrap gap-1 ease-in-out duration-500 overflow-auto'>
+      <div id='cards' className='flex justify-around flex-wrap gap-1 ease-in-out duration-1000 overflow-auto'>
        {
          carro.map(car=>{
            
@@ -44,10 +44,10 @@ const ocultar=()=>{
             })
           }
       </div>
-      <button className='left-2/4 absolute rotate-180' onClick={ocultar}>
+      <button className='left-2/4 absolute z-10 cerrar' onClick={ocultar}>
       <Img
       id="cerrar"      
-      style=" w-5 h-5"
+      style=" w-10 h-10"
       image={flecha}
       />
       </button>
