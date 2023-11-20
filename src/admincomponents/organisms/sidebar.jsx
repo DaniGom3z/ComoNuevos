@@ -26,10 +26,12 @@ const Sidebar = () => {
             style="text-white cursor-pointer hover:text-gray-300 text-2xl font-bold p-2 duration-1000 hover:bg-slate-900 "
             />
             </Link>
+            <Link to="/citas">
             <Lista
             text="Citas"
             style="text-white cursor-pointer relative hover:text-gray-300 text-xl font-semibold p-2 duration-1000 hover:bg-slate-900 "
             />
+            </Link>
             <li className='text-white cursor-pointer hover:text-gray-300 '>
               {/* Utiliza onClick para manejar el estado del menú desplegable */}
               <div onClick={toggleCarrosMenu} className='flex bg-opacity-20 text-xl font-semibold  p-2 hover:bg-slate-900 duration-1000 justify-between items-center'>

@@ -3,17 +3,15 @@ import axios from 'axios';
 import Tabla from '../organisms/tabla';
 import Header from '../organisms/header';
 import Sidebar from '../organisms/sidebar';
-
+import { BarLoader } from 'react-spinners';
 const Sedanes = () => {
 
   const [autos, setAutos]=useState(null)
 const [error, setError]=useState(null)
 const [loading, setLoading]=useState(true)
 
-useEffect(() => {
+
   const fetchData = async () => {
-    const claveSecretaCliente = process.env.REACT_APP_JWT_SECRET;
-    console.log('Clave secreta del cliente:', claveSecretaCliente);
 
     try {
       const tokenAlmacenado = localStorage.getItem('token');
@@ -28,8 +26,8 @@ useEffect(() => {
           });
     
           // Imprime la respuesta exitosa
+          
           console.log('Respuesta exitosa:', response.data);
-    
           // Actualiza el estado 'autos' con los datos recibidos
           setAutos(response.data);
         }else{
@@ -46,7 +44,7 @@ useEffect(() => {
       setLoading(false);
     }
   };
-
+useEffect(()=>{
   fetchData();
 }, []);
   return (
@@ -59,7 +57,7 @@ useEffect(() => {
                 <Sidebar/>
           <div className='flex flex-grow flex-wrap gap-10 items-start pt-20 pl-10 justify-center'>
           {error && <p>Error: {error}</p>}
-           {autos && <Tabla text="Lista De Deportivos" autos={autos}/>}
+           {autos ?( <Tabla text="Lista De Pick Up" autos={autos}/>):(<BarLoader color="blue" height={5} width={150}/>)}
           </div>
         </div>
       </div>

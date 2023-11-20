@@ -1,54 +1,65 @@
 import React, { useEffect,useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Img from '../../atoms/img'
 import Header from '../../oraganisms/header'
 import Title from '../../atoms/title'
 import Info from '../../atoms/info'
 import Button from '../../atoms/button'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import fondo from '../../../img/fondo.jpg'
 const PageInfo = () => {
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const id_auto = params.get('carro');
-  const [detallesCarro, setDetallesCarro] = useState(null);
+  const { id_auto } = useParams();
+  const [auto, setAuto] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:9000/autos/${id_auto}`);
-        if (response.status >= 200 && response.status < 300) {
-          setDetallesCarro(response.data);
-        } else {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error(`Error al obtener detalles del carro con ID ${id_auto}:`, error.message);
-      }
-    };
-
-    fetchData();
+    fetch(`http://localhost:9000/autos/${id_auto}`)
+      .then(response => response.json())
+      .then(data => setAuto(data))
+      .catch(error => console.error("Error al obtener detalles del auto:", error));
   }, [id_auto]);
-
+console.log(auto)
  
 
   return (
     <>
-    <div className='overflow-hidden'>
-
+    <div className='h-screen'>
       <Header/>
-    <div className='flex w-screen render justify-center items-center flex-col'>
-      <div className='  min-h-full min-w-full flex items-center justify-center'>
-      
-      <Link to="/form">
-      <Button styles="absolute bottom-28 left-48 bg-red-500 p-5 text-white text-xl font-semibold" text="AGENDAR CITA"/>
-      </Link>
+    <div>
+      <Img style="absolute top-0 h-full w-full" image={fondo}/>
+    </div>
+    <div className='flex justify-end flex-col relative  top-28 items-center bg-opacity-40 bg-slate-700 shadow-sm border-t-2 border-gray-100 border-b-2 h-3/4 '>
+      <Img style=" w-1/4" image={auto.imagenFrontal}/>
+      <Title styles="pt-5 text-white font-semibold w-2/4 text-center border-b-2 first-letter:text-red-500 text-2xl" text="DETALLES DEL AUTO"/>
+    <div className=' flex justify-between flex-wrap text-xl font-semibold items-end text-white w-2/4 h-fit p-10 '>
+      <div>
+      <Info text={"Nombre: " + auto.nombre}/>
+      <Info text={"Precio : $" + auto.precio}/>
+      <Info text={"Motor: " + auto.motor}/>
+      <Info text={"Cilindrad en cc: " + auto.cilindrada}/>
+      <Info text={"Potencia : " + auto.potencia}/>
+      <Info text={"Torque Nm: " + auto.torque}/>
+      <Info text={"Cilindros: " + auto.cilindros}/>
+      <Info text={"Valvulas: " + auto.valvulas}/>
+      <Info text={"Alimentacio: " + auto.alimentacion}/>
+      <Info text={"Traccion: " + auto.traccion}/>
       </div>
-      <div className='absolute left-20 top-32 w-1/5'>
-      <Title styles="text-xl font-semibold mb-10 uppercase" text="detalles del carro"/>
-      
+      <div>
+      <Info text={"Transmicion: " + auto.transmicion}/>
+      <Info text={"Velocidad maxima: " + auto.velocidad_maxima+"k/h"}/>
+      <Info text={"Velocidades: " + auto.velocidades}/>
+      <Info text={"Categoria: " + auto.tipo}/>
+      <Info text={"Puertas: " + auto.puertas}/>
+      <Info text={"Largo: " + auto.largo +" metros"}/>
+      <Info text={"Alto: " + auto.alto +" metros"}/>
+      <Info text={"Peso: " + auto.peso +" Toneladas"}/>
+      <Info text={"Capacidad del tanque en Litros: " + auto.capacidad_del_tanque+"L"}/>
+      <Info text={"Consumo: " + auto.consumo+" Kilometros por Litro"}/>
+      <Info text={"Color: " + auto.color}/>
       </div>
-      
+    </div>
+    <Link to="/form">
+    <Button styles="p-5 bg-blue-500 shadow-md rounded" text="Agendar Cita"/>
+    </Link>
     </div>
     </div>
     </>

@@ -1,11 +1,39 @@
 import React,{useState} from 'react';
 import Modal from './modal'
-
+import axios from 'axios';
 const Tabla = ({text, autos}) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
- 
-    
-   
+  
+  const[coche,setCoche]=useState(autos)
+  const[error, setError]=useState(null)
+   const handleEliminarFisicamente=async(idAuto)=>{
+        
+        try{
+            const token=localStorage.getItem('token')
+            
+            if(token){
+              const response =await axios.delete(`http://localhost:9000/eliminacionlogica/${idAuto}`,{
+                  headers:{
+                    Authorization: token
+                  },
+
+              })
+              setCoche(response.data)
+              console.log("eliminacion exitosa", response.data)
+              alert("se elimino correctamente")
+            }else{
+              console.log('el token no se guardo pai');
+            }
+          
+        }catch(error){
+          console.error("error al eliminar el coche", error)
+          alert("no se puedo eliminar el coche")
+          if(error.response){
+            console.error("respuesta del servidor", error.response.data)
+          }
+        }
+        setError("hubo un problema al eliminar los datos")
+   }
   
 
   return (
@@ -37,11 +65,13 @@ const Tabla = ({text, autos}) => {
             <td className="border p-2">
               <button
                 className="bg-yellow-500 text-white p-2 rounded mr-2"
+                
               >
                 Editar
               </button>
               <button
                 className="bg-red-500 text-white p-2 rounded"
+                onClick={()=>handleEliminarFisicamente(carro.id_auto)}
               >
                 Eliminar
               </button>
@@ -50,11 +80,6 @@ const Tabla = ({text, autos}) => {
         ))}
       </tbody>
       </table>
-
-      {/* Mostrar características del sedán seleccionado */}
-      
-
-      {/* Modal para editar características */}
       
     </div>
   );

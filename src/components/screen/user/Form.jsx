@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Header from '../../oraganisms/header'; // Corregí el typo en 'organisms'
 import axios from 'axios';
+import fondo from '../../../img/deportivo.jpg'
+import Fotter from '../../oraganisms/fotter'
 import validator from 'validator';
 
 const Form = () => {
@@ -38,8 +40,8 @@ const Form = () => {
     <>
       <div className="h-screen">
         <Header />
-        <div className="flex justify-center h-3/4 items-center">
-          
+        <div className="flex justify-center  h-3/4 items-center">
+          <img src={fondo} className='-z-10 absolute w-full h-full top-0' />
           <form
             onSubmit={handleSubmit}
             className="h-96 w-3/4 items-center shadow relative flex flex-col shadow-red-500 rounded-md"
@@ -50,12 +52,14 @@ const Form = () => {
            className='p-2 w-full border-black border-2 rounded shadow-xl'
            type="text" 
            placeholder='nombre'
+           required
            value={nombre} 
            onChange={(e) => setNombre(e.target.value)}
             />
             <input 
             className='p-2 w-full border-black border-2 rounded shadow-xl'
             type="email"
+            required
             placeholder='correo electronico'
              value={correo} 
              onChange={(e) => setCorreo(e.target.value)} 
@@ -63,6 +67,7 @@ const Form = () => {
            <input 
            className='p-2 w-full border-black border-2 rounded shadow-xl'
            type="date"
+           required
            placeholder='dia'
             value={dia} 
             onChange={(e) => setDia(e.target.value)}
@@ -76,6 +81,9 @@ const Form = () => {
             </div>
           </form>
         </div>
+        <div className='h-44 w-full gap-10  bg-zinc-950 bottom-0 z-10 absolute flex items-center justify-around'>
+                <Fotter/>
+            </div>
       </div>
     </>
   );

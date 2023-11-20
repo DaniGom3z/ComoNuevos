@@ -59,7 +59,7 @@ const Cards = ({ carro, price, name, imagenFrontal }) => {
               price={auto.precio}
               imagenFrontal={auto.imagen}
               details={carDetails.find((detail) => detail.id_auto === auto.id_auto)}
-              url={`/pageInfo?name=${auto.nombre}&price=${auto.precio}&img=${auto.imagen}&carro=${auto.id_auto}`}
+              url={`/pageInfo/${auto.id_auto}`}
             />
           ))
         ) : (

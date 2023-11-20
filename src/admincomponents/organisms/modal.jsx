@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 
 const ModalAgregarAuto = ({ isOpen, onClose }) => {
+  
   const [caracteristicas, setCaracteristicas] = useState({
     nombre: '',
     precio: '',

@@ -11,6 +11,7 @@ import Admin from './admincomponents/screen/pageAdmin'
 import Page2Admin from './admincomponents/screen/page2Admin';
 import Page3Admin from './admincomponents/screen/page3Admin'
 import Page4Admin from './admincomponents/screen/page4Admin'
+import CitasAdmin from './admincomponents/screen/citasAdmin';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
   return (
@@ -22,13 +23,14 @@ function App() {
     <Route path='/seconPage' element={<Page2/>}/>
     <Route path='/thirdPage' element={<ThirdPage/>}/>
     <Route path='/fordPage' element={<FordPage/>}/>
-    <Route path="/pageInfo" element={<PageInfo/>} />
+    <Route path="/pageInfo/:id_auto" element={<PageInfo />} />
     <Route path="/Form" element={<Form/>} />
     <Route path="/inicio" element={<Inicio/>} />
     <Route path="/admin" element={<Admin/>} />
     <Route path="/sedanesAdmin" element={<Page2Admin/>} />
     <Route path="/pickupAdmin" element={<Page3Admin/>} />
     <Route path="/deportivosAdmin" element={<Page4Admin/>} />
+    <Route path="/citas" element={<CitasAdmin/>} />
    
     
 

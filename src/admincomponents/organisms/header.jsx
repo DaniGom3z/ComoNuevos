@@ -6,14 +6,16 @@ const Header = () => {
  
   return (
     <>
-    <div className='bg-white w-screen h-20 shadow gap-10 flex items-center justify-around '>
+    <div className='bg-white w-full h-20 shadow  flex items-center justify-around '>
           <div>
             <Text
             text="ComoNuevos"
             style="text-2xl first-letter:text-red-500 font-bold"
             />
           </div>
+          <div>
          <NavbarAdmin/>
+          </div>
          
         </div>
     
