@@ -2,10 +2,8 @@ import React from 'react';
 import Cards from '../organisms/cards';
 import Header from '../organisms/header';
 import Sidebar from '../organisms/sidebar';
+
 const HomeAdmin = () => {
-
-
-  
 
   return (
     <>

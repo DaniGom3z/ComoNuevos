@@ -6,7 +6,7 @@ import vendidos from '../../img/mejor-vendido.png'
 const cards = () => {
   return (
     <>
-  
+    
     <Card
     precio="$110K"
     total="Total Vendido"
@@ -26,7 +26,7 @@ const cards = () => {
     image={usuarios}
     />
    
-    
+   
     </>
   )
 }

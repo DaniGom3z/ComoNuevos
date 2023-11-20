@@ -7,6 +7,7 @@ import notificaciones from '../../img/notificaciones.png';
 import usuario from '../../img/usuario.png';
 
 const NavbarAdmin = () => {
+  const user= localStorage.getItem('usuarios')
   const [notificacionesAbierto, setNotificacionesAbierto] = useState(false);
   const [mensajesAbierto, setMensajesAbierto] = useState(false);
   const [usuariosAbierto, setUsuariosAbierto] = useState(false);
@@ -134,8 +135,8 @@ const NavbarAdmin = () => {
   {usuariosAbierto && (
     <div className='absolute top-full right-0 mt-2 w-48 bg-white shadow rounded border'>
       {/* Contenido del menú de usuarios */}
-      <div className='p-2 border-b-2'>Usuario 1</div>
-      <div className='p-2 border-b-2'>Usuario 2</div>
+      <div className='p-2 border-b-2'>{user}</div>
+
       {/* Puedes agregar más usuarios aquí */}
     </div>
   )}

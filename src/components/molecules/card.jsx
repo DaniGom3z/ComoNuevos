@@ -3,7 +3,7 @@ import Img from '../atoms/img'
 import Info from '../atoms/info'
 import Button from '../atoms/button'
 import { Link } from 'react-router-dom'
-const Card = ({price,name,stock,img}) => {
+const Card = ({price,name,imagenFrontal,url,color}) => {
 
  
 
@@ -11,12 +11,19 @@ const Card = ({price,name,stock,img}) => {
   return (
     <>
     <div className=' w-52 h-48 ease-in-out duration-200 mt-14 rounded-md '>
+     
+      <h2 className='text-md uppercase font-bold text-center'>{name}</h2>
+      <h2 className='text-md uppercase font-bold text-center'>{color}</h2>
+
+      <h2 className='text-sm font-semibold text-gray-500 text-center border-b-2 mb-1 border-black'>{"$"+ price}</h2>
       <div className='h-32 shadow-sm overflow-hidden hover:h-48 ease-in-out duration-200'>
         <div>
-          <Img style="w-full  h-32 " image={img}/>
+          <Img style="w-full  h-32 " image={imagenFrontal}/>
         </div>
+        
           <div className='w-full h-16'>
-            <Link to={`/pageInfo?name=${name}&price=${price}&stock=${stock}&img=${img}`}>
+            
+            <Link to={url}>
             <Button 
               styles="text-white w-full bg-red-500 h-full  z-10  text-xl font-semibold"
               text="VER"
