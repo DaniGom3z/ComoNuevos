@@ -22,7 +22,7 @@ console.log(auto)
 
   return (
     <>
-    <div className='min-h-screen min-w-screen overflow-auto'>
+    <div className='min-h-screen max-h-screen min-w-screen overflow-auto'>
       <Header/>
     <div>
       <Img style="absolute top-0 h-full w-full" image={fondo}/>

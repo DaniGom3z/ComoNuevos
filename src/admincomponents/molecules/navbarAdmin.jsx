@@ -5,13 +5,14 @@ import avatar2 from '../../avatar/angus.jpg';
 import mensajes from '../../img/enviar-mensaje.png';
 import notificaciones from '../../img/notificaciones.png';
 import usuario from '../../img/usuario.png';
+import axios from 'axios';
+
 
 const NavbarAdmin = () => {
-  const user= localStorage.getItem('usuarios')
   const [notificacionesAbierto, setNotificacionesAbierto] = useState(false);
   const [mensajesAbierto, setMensajesAbierto] = useState(false);
   const [usuariosAbierto, setUsuariosAbierto] = useState(false);
-
+  const [usuario, setUsuario]=useState()
   const toggleNotificaciones = () => {
     setNotificacionesAbierto(!notificacionesAbierto);
   };
@@ -22,6 +23,28 @@ const NavbarAdmin = () => {
 
   const toggleUsuarios = () => {
     setUsuariosAbierto(!usuariosAbierto);
+    handleUsuarios();
+  };
+
+  const handleUsuarios =async()=>{
+    try{
+      const token=localStorage.getItem('token')
+      if(token){
+        const response = await axios.get(`http://localhost:9000/informacion/`,{
+          headers:{
+            Authorization: token,
+          },
+        });
+        console.log(response.data.usuario);
+          setUsuario(response.data.usuario)
+        console.log("respuesta exitosa", response.data);
+      } else {
+        console.log('el token no se guardo pai');
+      }
+    } catch (error) {
+      console.error('error al eliminar la encontrar informacion', error);
+      alert('No se encontro la informacion');
+    }
   };
 
   // Refs para los elementos de los menús
@@ -135,9 +158,8 @@ const NavbarAdmin = () => {
   {usuariosAbierto && (
     <div className='absolute top-full right-0 mt-2 w-48 bg-white shadow rounded border'>
       {/* Contenido del menú de usuarios */}
-      <div className='p-2 border-b-2'>{user}</div>
-
-      {/* Puedes agregar más usuarios aquí */}
+      <div className='p-2 border-b-2'></div>
+     
     </div>
   )}
 </div>

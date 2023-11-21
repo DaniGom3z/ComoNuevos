@@ -28,7 +28,6 @@ const fetchData = async () => {
                       },
 
               });
-
                 const noEliminadoLogicamente = response.data.filter(carro => carro.eliminada_logicamente===0)
         
        

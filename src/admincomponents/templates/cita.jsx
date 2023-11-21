@@ -13,14 +13,16 @@ const ListaCitas = () => {
     try {
       const token = localStorage.getItem('token');
 
+
       if (token) {
         const response = await axios.get('http://localhost:9000/citas', {
           headers: {
             Authorization: token,
           },
         });
-        const citasNoEliminadas = response.data.filter(citas => citas.eliminada_logicamente === 0);
 
+        const citasNoEliminadas = response.data.citasFinales.filter(citas => citas.eliminada_logicamente === 0);
+      
         console.log('respuesta exitosa', response.data);
         setCitas(citasNoEliminadas);
       } else {
@@ -28,7 +30,6 @@ const ListaCitas = () => {
       }
     } catch (error) {
       console.error('Error', error);
-
       if (error.response) {
         console.error('Respuesta del servidor:', error.response.data);
       }

@@ -98,7 +98,9 @@ const ModalEditar = ({isOpen, onClose, carro}) => {
                formData.append('capacidad_del_tanque', valoresActualizados.capacidad_del_tanque)
                formData.append('consumo', valoresActualizados.consumo)
                formData.append('color',valoresActualizados.color)
-
+              formData.append('imagenFrontal', valoresActualizados.imagenFrontal)
+              formData.append('imagenLateral', valoresActualizados.imagenLateral)
+              formData.append('imagenInterior', valoresActualizados.imagenInterior)
                
                const response =await axios.put(`http://localhost:9000/autos/${carro.id_auto}`, formData,{
                 headers:{

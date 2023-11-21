@@ -14,12 +14,12 @@ const PapeleraDeCitas = () => {
         const token = localStorage.getItem('token');
   
         if (token) {
-          const response = await axios.get('http://localhost:9000/citas', {
+          const response = await axios.get('http://localhost:9000/citas?perPage=100', {
             headers: {
               Authorization: token,
             },
           });
-          const citasEliminadas = response.data.filter(citas => citas.eliminada_logicamente === 1);
+          const citasEliminadas = response.data.citasFinales.filter(citas => citas.eliminada_logicamente === 1);
   
           console.log('respuesta exitosa', response.data);
           setCitas(citasEliminadas);

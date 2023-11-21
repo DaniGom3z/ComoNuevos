@@ -14,7 +14,7 @@ const fechtData=async()=>{
     const token =localStorage.getItem('token');
 
     if(token){
-      const response =await axios.get('http://localhost:9000/auto',{
+      const response =await axios.get('http://localhost:9000/auto?perPage=100',{
         headers:{
           Authorization: token,
         },
