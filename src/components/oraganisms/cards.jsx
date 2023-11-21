@@ -50,20 +50,18 @@ const Cards = ({ carro, price, name, imagenFrontal }) => {
           <Img id="abrir" style="w-10 h-10" image={flecha} />
         </button>
         <div id='cards' className={`flex justify-around flex-wrap gap-1 ease-in-out duration-1000 overflow-auto mostrar`}>
-        {carro.length > 0 ? (
+        {carro.length > 0 && (
           carro.map((auto, index) => (
             <Card
             
-              key={auto.id_auto}
-              name={auto.nombre}
-              price={auto.precio}
-              imagenFrontal={auto.imagen}
-              details={carDetails.find((detail) => detail.id_auto === auto.id_auto)}
-              url={`/pageInfo/${auto.id_auto}`}
+            key={auto.id_auto}
+            name={auto.nombre}
+            price={auto.precio}
+            imagenFrontal={auto.imagen}
+            details={carDetails.find((detail) => detail.id_auto === auto.id_auto)}
+            url={`/pageInfo/${auto.id_auto}`}
             />
           ))
-        ) : (
-          <BarLoader />
         )}
         </div>
         <button className='left-2/4 absolute z-10 cerrar' onClick={ocultar}>

@@ -22,15 +22,15 @@ console.log(auto)
 
   return (
     <>
-    <div className='h-screen'>
+    <div className='min-h-screen min-w-screen overflow-auto'>
       <Header/>
     <div>
       <Img style="absolute top-0 h-full w-full" image={fondo}/>
     </div>
-    <div className='flex justify-end flex-col relative  top-28 items-center bg-opacity-40 bg-slate-700 shadow-sm border-t-2 border-gray-100 border-b-2 h-3/4 '>
-      <Img style=" w-1/4" image={auto.imagenFrontal}/>
+    <div className='flex justify-end flex-col relative  top-16 items-center bg-opacity-40 bg-slate-700 shadow-sm border-t-2 border-gray-100 border-b-2 h-3/4 '>
+      <Img style=" w-1/4 relative bottom-10" image={auto.imagenFrontal}/>
       <Title styles="pt-5 text-white font-semibold w-2/4 text-center border-b-2 first-letter:text-red-500 text-2xl" text="DETALLES DEL AUTO"/>
-    <div className=' flex justify-between flex-wrap text-xl font-semibold items-end text-white w-2/4 h-fit p-10 '>
+    <div className=' flex justify-between flex-wrap text-xl font-semibold items-end text-white w-2/4 h-fit '>
       <div>
       <Info text={"Nombre: " + auto.nombre}/>
       <Info text={"Precio : $" + auto.precio}/>
@@ -58,7 +58,7 @@ console.log(auto)
       </div>
     </div>
     <Link to="/form">
-    <Button styles="p-5 bg-blue-500 shadow-md rounded" text="Agendar Cita"/>
+    <Button styles="p-5 bg-blue-500 shadow-md relativerounded" text="Agendar Cita"/>
     </Link>
     </div>
     </div>

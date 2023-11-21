@@ -29,11 +29,10 @@ const fetchData = async () => {
 
               });
 
-       
-                console.log('Respuesta exitosa:', response.data);
+                const noEliminadoLogicamente = response.data.filter(carro => carro.eliminada_logicamente===0)
         
        
-               setAutos(response.data);
+               setAutos(noEliminadoLogicamente);
               }else{
               console.log("no jala")
               }
@@ -50,7 +49,7 @@ const fetchData = async () => {
           };
 
         fetchData();
-    }, []);
+    },);
 
     
 
@@ -64,8 +63,11 @@ const fetchData = async () => {
         <div className='flex flex-grow justify-between'>
                 <Sidebar/>
           <div className='flex flex-grow flex-wrap gap-10 items-start pt-20 pl-10 justify-center'>
-          {error && <p>Error: {error}</p>}
-           {autos?( <Tabla text="Lista De Deportivos" autos={autos}/>):(<BarLoader color="blue" height={5} width={150}/>)}
+          {error? (<p className='text-red-500'>{error}</p>):(autos ? (
+            <Tabla text="Lista De Deportivos" autos={autos}/>
+            ):(<BarLoader color="blue" height={5} width={150}/>)
+          )}
+         
            
           </div>
         </div>

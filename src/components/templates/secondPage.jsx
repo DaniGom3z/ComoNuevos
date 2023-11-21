@@ -4,6 +4,7 @@ import Banner from '../oraganisms/banner'
 import { BarLoader } from 'react-spinners'
 import Img2 from '../../img/sedan.jpg'
 import Cards from '../oraganisms/cards'
+import axios from 'axios'
 
 const SecondPage = () => {
   const [carro, setCarro] = useState(null);
@@ -13,14 +14,17 @@ const SecondPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:9000/autos?tipo=sedan`);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+        const response = await axios.get("http://localhost:9000/autos?tipo=sedan");
+        
+        
+        const data = await response.data;
+        if(data.length === 0){
+          setError("no tenemos autos disponibles")
+          setLoading(false)
+          return;
         }
-
-        const data = await response.json();
-        setCarro(data);
+        const autosNoEliminados = data.filter(carro=> carro.eliminada_logicamente===0)
+        setCarro(autosNoEliminados);
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener la lista de autos:', error.message);
@@ -30,8 +34,7 @@ const SecondPage = () => {
     };
 
     fetchData();
-  }, []);
-
+  },[] );
   return (
     <>
       <div className='fixed z-20 w-screen'>
@@ -42,18 +45,13 @@ const SecondPage = () => {
         <div className='image-overlay'></div>
       </div>
       <div className='relative p-10'>
-        {loading ? (
-          <div className="loader-container">
-            <BarLoader color="#3498db" loading={loading} height={8} width={200} />
+      {error? (<p className='w-full text-center font-semibold text-red-500'>{error}</p>):(carro? (
+        <Cards carro={carro}/>):(
+          <div className='w-full flex justify-center'>
+          <BarLoader color="#3498db" loading={loading} height={8} width={200}/>
           </div>
-        ) : (
-          carro ? (
-            <Cards carro={carro} />
-          ) : (
-            <p>No hay datos de autos disponibles.</p>
-          )
+        )
         )}
-        {error && <p>Error: {error}</p>}
       </div>
     </>
   )

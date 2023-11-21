@@ -27,7 +27,8 @@ useEffect(() => {
           console.log('Respuesta exitosa:', response.data);
           
           
-          setAutos(response.data);
+          const autosNoEliminadosLogicamente = response.data.filter(carros=> carros.eliminada_logicamente===0)
+      setAutos(autosNoEliminadosLogicamente)
         }else{
           console.log(error)
         }
@@ -55,8 +56,10 @@ useEffect(() => {
         <div className='flex flex-grow justify-between'>
                 <Sidebar/>
           <div className='flex flex-grow flex-wrap gap-10 items-start pt-20 pl-10 justify-center'>
-          {error && <p>Error: {error}</p>}
-           {autos ? (<Tabla text="Lista De Sedanes" autos={autos}/>):(<BarLoader color="blue" height={5} width={150}/>)}
+          {error? (<p className='text-red-500'>{error}</p>):(autos ? (
+            <Tabla text="Lista de Sedanes" autos={autos}/>
+            ):(<BarLoader color="blue" height={5} width={150}/>)
+          )}
           </div>
         </div>
       </div>

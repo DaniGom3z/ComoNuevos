@@ -16,9 +16,9 @@ const Card = ({price,name,imagenFrontal,url,color}) => {
       <h2 className='text-md uppercase font-bold text-center'>{color}</h2>
 
       <h2 className='text-sm font-semibold text-gray-500 text-center border-b-2 mb-1 border-black'>{"$"+ price}</h2>
-      <div className='h-32 shadow-sm overflow-hidden hover:h-48 ease-in-out duration-200'>
+      <div className='h-32 shadow-md overflow-hidden hover:h-48 ease-in-out duration-200'>
         <div>
-          <Img style="w-full  h-32 " image={imagenFrontal}/>
+          <Img style="w-full  h-32" image={imagenFrontal}/>
         </div>
         
           <div className='w-full h-16'>

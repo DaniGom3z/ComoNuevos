@@ -3,7 +3,8 @@ import Header from '../oraganisms/header'
 import Banner from '../oraganisms/banner'
 import Img3 from '../../img/img3.webp'
 import Cards from '../oraganisms/cards'
-
+import { BarLoader } from 'react-spinners'
+import axios from 'axios'
 const FordPage = () => {
 
  const [carro, setCarro] = useState(null);
@@ -13,14 +14,17 @@ const FordPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:9000/autos?tipo=pick%20up");
+        const response = await axios.get("http://localhost:9000/autos?tipo=pick%20up");
         
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.data;
+        if(data.length === 0){
+          setError("no tenemos autos disponibles")
+          setLoading(false)
+          return;
         }
-        
-        const data = await response.json();
-        setCarro(data);
+        const autosNoEliminados = data.filter(carro=> carro.eliminada_logicamente===0)
+        setCarro(autosNoEliminados);
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener la lista de autos:', error.message);
@@ -30,7 +34,7 @@ const FordPage = () => {
     };
 
     fetchData();
-  }, []);
+  },[] );
   return (
     <>
       <div className='fixed z-20 w-screen'>
@@ -41,8 +45,13 @@ const FordPage = () => {
         <div className='image-overlay'></div>
       </div>
       <div className='relative p-10'>
-        {error && <p>Error: {error}</p>}
-        {carro && <Cards carro={carro} />}
+      {error? (<p className='w-full text-center font-semibold text-red-500'>{error}</p>):(carro? (
+        <Cards carro={carro}/>):(
+          <div className='w-full flex justify-center'>
+          <BarLoader color="#3498db" loading={loading} height={8} width={200}/>
+          </div>
+        )
+        )}
       </div>
     </>
   );

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const lista = ({text,style}) => {
+const lista = ({text,style,image,styleImg}) => {
   return (
     <>
-    <li className={style}>{text}</li>
+    <li className={style}>{text} <img className={styleImg} src={image} alt="" /></li>
     </>
   )
 }

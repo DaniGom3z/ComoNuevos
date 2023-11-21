@@ -5,6 +5,8 @@ import Cards from '../oraganisms/cards'
 import img2 from '../../img/carro.jpg'
 import Fotter from '../oraganisms/fotter'
 import VentaCarros from '../oraganisms/ventaCarros'
+import axios from 'axios'
+import { BarLoader } from 'react-spinners'
 const HomeScreen = () => {
 const [carro,setCarro]=useState(null)
 const [loading, setLoading] = useState(true);
@@ -45,25 +47,24 @@ useEffect(() => {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:9000/autos");
+      const response = await axios.get("http://localhost:9000/autos");
+      const data = await response.data;
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+    if(data.length === 0){
+      setError("no tenemos autos disponibles")
+      setLoading(false)
       
-      const data = await response.json();
-      setCarro(data);
-      const allIds = data.map(auto => auto.id_auto);
-
+    }
+    const noEliminadoLogicamente = data.filter(carro => carro.eliminada_logicamente===0)
+    setCarro(noEliminadoLogicamente);
+        setLoading(false);
       
-      localStorage.setItem('carroData', JSON.stringify(allIds));
-      setLoading(false);
     } catch (error) {
       console.error('Error al obtener la lista de autos:', error.message);
       setError('Hubo un problema al cargar los datos.');
       setLoading(false);
     }
-  };
+  }
 
   fetchData();
 }, []);
@@ -79,8 +80,13 @@ useEffect(() => {
          <div className='image-overlay'></div>
          </div>
          <div className='relative p-10'>
-        {error && <p>Error: {error}</p>}
-        {carro && <Cards carro={carro} />}
+        {error? (<p className='w-full text-center font-semibold text-red-500'>{error}</p>):(carro? (
+        <Cards carro={carro}/>):(
+          <div className='w-full flex justify-center'>
+          <BarLoader color="#3498db" loading={loading} height={8} width={200}/>
+          </div>
+        )
+        )}
       </div>
          <div className='contenedor gap-20 border-b border-red-100 relative w-full flex flex-col items-center justify-center '>
          <VentaCarros/>

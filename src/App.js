@@ -12,6 +12,8 @@ import Page2Admin from './admincomponents/screen/page2Admin';
 import Page3Admin from './admincomponents/screen/page3Admin'
 import Page4Admin from './admincomponents/screen/page4Admin'
 import CitasAdmin from './admincomponents/screen/citasAdmin';
+import PapeleraCitas from './admincomponents/screen/papeleraCitas';
+import PapeleraAutos from './admincomponents/screen/papeleraAutos';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
     <Route path="/pickupAdmin" element={<Page3Admin/>} />
     <Route path="/deportivosAdmin" element={<Page4Admin/>} />
     <Route path="/citas" element={<CitasAdmin/>} />
+    <Route path="/papeleraCitas" element={<PapeleraCitas/>} />
+    <Route path="/papeleraAutos" element={<PapeleraAutos/>} />
    
     
 

@@ -94,7 +94,13 @@ padding-bottom: 200px;
   background-color: rgba(176, 204, 236, 0.116);
 }
 
-
+@font-face {
+  font-family: "titulo";
+  src: url("./font/coolvetica\ rg.otf");
+}
+.titulo{
+  font-family: "titulo";
+}
 
 
 

@@ -1,146 +1,145 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import axios from 'axios';
-
-const ModalAgregarAuto = ({ isOpen, onClose }) => {
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import Modal from 'react-modal'
+const ModalEditar = ({isOpen, onClose, carro}) => {
   
-  const [caracteristicas, setCaracteristicas] = useState({
-    nombre: '',
-    precio: '',
-    motor: '',
-    cilindrada: '',
-    potencia: '',
-    torque: '',
-    cilindros: '',
-    valvulas: '',
-    alimentacion: '',
-    traccion: '',
-    transmicion: '',
-    velocidad_maxima: '',
-    velocidades: '',
-    tipo: '',
-    puertas: '',
-    largo: '',
-    alto: '',
-    peso: '',
-    capacidad_del_tanque: '',
-    consumo: '',
-    color: '',
-    imagenFrontal: null,
-    imagenInterior: null,
-    imagenLateral: null,
-    
-  });
-  
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCaracteristicas({ ...caracteristicas, [name]: value });
-  };
+  const [valoresActualizados, setValoresActualizados] =useState({
+          nombre: '',
+          precio: '',
+          motor: '',
+          cilindrada: '',
+          potencia: '',
+          torque: '',
+          cilindros: '',
+          valvulas: '',
+          alimentacion: '',
+          traccion: '',
+          transmicion: '',
+          velocidad_maxima: '',
+          velocidades: '',
+          tipo: '',
+          puertas: '',
+          largo: '',
+          alto: '',
+          peso: '',
+          capacidad_del_tanque: '',
+          consumo: '',
+          color: '',
+          imagenFrontal: null,
+          imagenInterior: null,
+          imagenLateral: null,
+})
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    setCaracteristicas({ ...caracteristicas, [name]: files[0] });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const camposObligatorios = [
-      'nombre', 'precio', 'motor', 'cilindrada', 'potencia', 'torque',
-      'cilindros', 'valvulas', 'alimentacion', 'traccion', 'transmicion',
-      'velocidad_maxima', 'velocidades', 'tipo', 'puertas', 'largo',
-      'alto', 'peso', 'capacidad_del_tanque', 'consumo', 'color',
-      'imagenFrontal', 'imagenInterior', 'imagenLateral'
-    ];
-  
-    for (const campo of camposObligatorios) {
-      if (!caracteristicas[campo]) {
-        alert(`El campo ${campo} es obligatorio.`);
-        return;
-      }
+    const handleInputChange=async(e)=>{
+          const {name, value}=e.target
+          setValoresActualizados({...valoresActualizados, [name]:value})
     }
+    const handleFileChange = (e) => {
+      const { name, files } = e.target;
+      setValoresActualizados({ ...valoresActualizados, [name]: files[0] });
+    };
 
-    if (!caracteristicas.imagenFrontal || !caracteristicas.imagenInterior || !caracteristicas.imagenLateral) {
-      alert("Debes seleccionar al menos un archivo de imagen.");
-      return;
-    }
-    const tokenAlmacenado = localStorage.getItem('token');
-
-    try {
-      const formData = new FormData();
-      // Agrega campos de texto
-      formData.append('nombre', caracteristicas.nombre);
-      formData.append('precio', caracteristicas.precio);
-      formData.append('motor', caracteristicas.motor);
-      formData.append('cilindrada', caracteristicas.cilindrada);
-      formData.append('potencia', caracteristicas.potencia);
-      formData.append('torque', caracteristicas.torque);
-      formData.append('cilindros', caracteristicas.cilindros);
-      formData.append('valvulas', caracteristicas.valvulas);
-      formData.append('alimentacion', caracteristicas.alimentacion);
-      formData.append('traccion', caracteristicas.traccion);
-      formData.append('transmicion', caracteristicas.transmicion);
-      formData.append('velocidad_maxima', caracteristicas.velocidad_maxima);
-      formData.append('velocidades', caracteristicas.velocidades);
-      formData.append('tipo', caracteristicas.tipo);
-      formData.append('puertas', caracteristicas.puertas);
-      formData.append('largo', caracteristicas.largo);
-      formData.append('alto', caracteristicas.alto);
-      formData.append('peso', caracteristicas.peso);
-      formData.append('capacidad_del_tanque', caracteristicas.capacidad_del_tanque);
-      formData.append('consumo', caracteristicas.consumo);
-      formData.append('color', caracteristicas.color);
-      formData.append('imagenFrontal', caracteristicas.imagenFrontal);
-      formData.append('imagenInterior', caracteristicas.imagenInterior);
-      formData.append('imagenLateral', caracteristicas.imagenLateral);
-
-      const response = await axios.post(
-        "http://localhost:9000/autos",
-        formData,
-        {
-          headers: {
-            Authorization: tokenAlmacenado,
-          
+    const fechtData =async()=>{
+      try{
+        const token=localStorage.getItem('token')
+        const response =await axios.get(`http://localhost:9000/auto/${carro.id_auto}`,{
+          headers:{
+            Authorization: token
           },
-        }
-      );
-
-      console.log('Respuesta exitosa:', response.data);
-      alert("agregado exitosamente")
-    } catch (error) {
-      console.error('Error al agregar auto:', error);
-      alert("error al agregar")
-
-      if (error.response) {
-        console.error('Respuesta del servidor:', error.response.data);
+        });
+        console.log("respuesta exitosa", response.data)
+        setValoresActualizados(response.data)
+      }catch(error){
+          console.error('Error', error)
+        
       }
     }
 
-    onClose();
-  };
+    const handleSubmit =async(e)=>{
+       e.preventDefault();
+        
+       const camposObligatorios = [
+        'nombre', 'precio', 'motor', 'cilindrada', 'potencia', 'torque',
+        'cilindros', 'valvulas', 'alimentacion', 'traccion', 'transmicion',
+        'velocidad_maxima', 'velocidades', 'tipo', 'puertas', 'largo',
+        'alto', 'peso', 'capacidad_del_tanque', 'consumo', 'color',
+        'imagenFrontal', 'imagenInterior', 'imagenLateral'
+      ];
+    
+      for (const campo of camposObligatorios) {
+        if (!valoresActualizados[campo]) {
+          alert(`El campo ${campo} es obligatorio.`);
+          return;
+        }
+      }
+      
+      const token=localStorage.getItem('token')
+            try{
+               const formData = new FormData();
 
-  useEffect(() => {
-    Modal.setAppElement('body');
-  }, []);
+               formData.append('nombre', valoresActualizados.nombre)
+               formData.append('precio', valoresActualizados.precio)
+               formData.append('motor', valoresActualizados.motor)
+               formData.append('cilindrada', valoresActualizados.cilindrada)
+               formData.append('potencia', valoresActualizados.potencia)
+               formData.append('torque', valoresActualizados.torque)
+               formData.append('cilindros', valoresActualizados.cilindros)
+               formData.append('valvulas', valoresActualizados.valvulas)
+               formData.append('alimentacion', valoresActualizados.alimentacion)
+               formData.append('traccion', valoresActualizados.traccion)
+               formData.append('transmicion', valoresActualizados.transmicion)
+               formData.append('velocidad_maxima', valoresActualizados.velocidad_maxima)
+               formData.append('velocidades', valoresActualizados.velocidades)
+               formData.append('tipo', valoresActualizados.tipo)
+               formData.append('puertas', valoresActualizados.puertas)
+               formData.append('largo', valoresActualizados.largo)
+               formData.append('alto', valoresActualizados.alto)
+               formData.append('peso', valoresActualizados.peso)
+               formData.append('capacidad_del_tanque', valoresActualizados.capacidad_del_tanque)
+               formData.append('consumo', valoresActualizados.consumo)
+               formData.append('color',valoresActualizados.color)
 
-  return (
+               
+               const response =await axios.put(`http://localhost:9000/autos/${carro.id_auto}`, formData,{
+                headers:{
+                  Authorization: token
+                },
+               });
+
+               console.log("respuesta exitosa", response.data)
+               alert("auto editado correctamente")
+                //
+            }catch(error){
+              console.error('error al agregar auto', error)
+              alert("error al agregar auto")
+              if (error.response) {
+                console.error('Respuesta del servidor:', error.response.data);
+              }
+            }
+            onClose()
+    }
+    useEffect(()=>{
+      fechtData()
+    },[])
+
+    return (
+      <>
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      contentLabel="Modal para agregar auto"
-      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-md shadow-md"
-      overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+    isOpen={isOpen}
+    onRequestClose={onClose}
+    contentLabel="Modal para agregar auto"
+    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 overflow-auto -translate-y-1/2 bg-white p-8 rounded-md shadow-md"
+    overlayClassName="fixed inset-0 bg-black bg-opacity-50"
     >
-      <h2 className="text-2xl -2 text-center">Agregar Auto</h2>
-
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <h2 className="text-2xl -2 text-center">Editar auto</h2>
+        <form onSubmit={handleSubmit} className="grid grid-cols-2 md:grid-cols-2 gap-2">
       <div className="w-full md:w-1/2 pt">
         <label>
           nombre:
           <input
             type="text"
             name="nombre"
-            value={caracteristicas.nombre}
+            value={valoresActualizados.nombre}
             onChange={handleInputChange}
             className="w-full py-1 border border-gray-300 rounded"
             />
@@ -150,7 +149,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="precio"
-            value={caracteristicas.precio}
+            value={valoresActualizados.precio}
             onChange={handleInputChange}
             className="w-full py-1 border border-gray-300 rounded"
             />
@@ -160,7 +159,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <select
             name="motor"
             id="motor"
-            value={caracteristicas.motor}
+            value={valoresActualizados.motor}
             onChange={handleInputChange}
             className="w-full py-2 border border-gray-300 rounded"
           >
@@ -180,7 +179,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="text"
             name="cilindrada"
-            value={caracteristicas.cilindrada}
+            value={valoresActualizados.cilindrada}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -190,7 +189,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="text"
             name="potencia"
-            value={caracteristicas.potencia}
+            value={valoresActualizados.potencia}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -200,7 +199,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="torque"
-            value={caracteristicas.torque}
+            value={valoresActualizados.torque}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -210,7 +209,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="text"
             name="cilindros"
-            value={caracteristicas.cilindros}
+            value={valoresActualizados.cilindros}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -220,7 +219,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="valvulas"
-            value={caracteristicas.valvulas}
+            value={valoresActualizados.valvulas}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -230,13 +229,13 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <select
             name="alimentacion"
             id="alimentacion"
-            value={caracteristicas.alimentacion}
+            value={valoresActualizados.alimentacion}
             onChange={handleInputChange}
             className="w-full py-2 border border-gray-300 rounded"
           >
             <option value="">Seleccionar Alimentacion</option>
             <option value="Inyeccion directa de combustible">Inyeccion directa de combustible</option>
-            <option value="Sobrealimentacion">Sobrealimentacion</option>
+            <option value="Sobrealimentación">Sobrealimentacion</option>
             <option value="Inyeccion directa">Inyeccion directa</option>
           </select>
         </label>
@@ -245,7 +244,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <select
             name="traccion"
             id="traccion"
-            value={caracteristicas.traccion}
+            value={valoresActualizados.traccion}
             onChange={handleInputChange}
             className="w-full py-2 border border-gray-300 rounded"
           >
@@ -261,7 +260,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <select
             name="transmicion"
             id="transmision"
-            value={caracteristicas.transmicion}
+            value={valoresActualizados.transmicion}
             onChange={handleInputChange}
             className="w-full py-2 border border-gray-300 rounded"
           >
@@ -283,7 +282,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="velocidad_maxima"
-            value={caracteristicas.velocidad_maxima}
+            value={valoresActualizados.velocidad_maxima}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -295,7 +294,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="velocidades"
-            value={caracteristicas.velocidades}
+            value={valoresActualizados.velocidades}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -305,7 +304,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
          <select 
          name="tipo" 
          id="tipo"
-         value={caracteristicas.tipo}
+         value={valoresActualizados.tipo}
          onChange={handleInputChange}
          className='w-full py-2 border border-gray-300 rounded'
          >
@@ -320,7 +319,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="puertas"
-            value={caracteristicas.puertas}
+            value={valoresActualizados.puertas}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -330,7 +329,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="largo"
-            value={caracteristicas.largo}
+            value={valoresActualizados.largo}
             onChange={handleInputChange}
             className="w-full -2 py-2 border border-gray-300 rounded"
             />
@@ -340,7 +339,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="alto"
-            value={caracteristicas.alto}
+            value={valoresActualizados.alto}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -350,7 +349,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="peso"
-            value={caracteristicas.peso}
+            value={valoresActualizados.peso}
             onChange={handleInputChange}
             className="w-full  py-2 border border-gray-300 rounded"
             />
@@ -360,7 +359,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="capacidad_del_tanque"
-            value={caracteristicas.capacidad_del_tanque}
+            value={valoresActualizados.capacidad_del_tanque}
             onChange={handleInputChange}
             className="w-full -2 py-2 border border-gray-300 rounded"
             />
@@ -370,7 +369,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <input
             type="number"
             name="consumo"
-            value={caracteristicas.consumo}
+            value={valoresActualizados.consumo}
             onChange={handleInputChange}
             className="w-full -2 py-2 border border-gray-300 rounded"
             />
@@ -380,7 +379,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
           <select
             name="color"
             id="color"
-            value={caracteristicas.color}
+            value={valoresActualizados.color}
             onChange={handleInputChange}
             className="w-full py-2 border border-gray-300 rounded"
           >
@@ -403,6 +402,7 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
             type="file"
             name="imagenFrontal"
             onChange={handleFileChange}
+            
             />
         </label>
         <label className="">
@@ -425,13 +425,18 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
             
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 -2 rounded hover:bg-green-600"
+          className="bg-blue-500 text-white py-2 -2 rounded "
           >
-          Agregar Auto
+          Guardar edicion
         </button>
       </form>
-    </Modal>
-  );
-};
+         
+      
+    
+     </Modal>
+    
+    </>
+  )
+}
 
-export default ModalAgregarAuto;
+export default ModalEditar

@@ -13,7 +13,7 @@ const HomeAdmin = () => {
         {/* Contenido principal */}
         <div className='flex flex-grow justify-between'>
                 <Sidebar/>
-          <div className='flex flex-grow flex-wrap gap-10 items-start pt-20 justify-center'>
+          <div className='flex w-3/4 bg-stone-50 relative top-10 gap-20 flex-wrap items-start pt-20 justify-center'>
             <Cards />
           </div>
         </div>

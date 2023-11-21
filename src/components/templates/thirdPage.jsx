@@ -5,6 +5,7 @@ import Banner from '../oraganisms/banner'
 import Img4 from '../../img/deportivo.jpg'
 import Cards from '../oraganisms/cards'
 import { BarLoader } from 'react-spinners'
+import axios from 'axios'
 const ThirdPage = () => {
 
     const [carro,setCarro]=useState(null)
@@ -13,14 +14,17 @@ const ThirdPage = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch("http://localhost:9000/autos?tipo=deportivo");
+          const response = await axios.get("http://localhost:9000/autos?tipo=deportivo");
           
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+          
+          const data = await response.data;
+          if(data.length === 0){
+            setError("no tenemos autos disponibles")
+            setLoading(false)
+            return;
           }
-          
-          const data = await response.json();
-          setCarro(data);
+          const autosNoEliminados = data.filter(carro=> carro.eliminada_logicamente===0)
+          setCarro(autosNoEliminados);
           setLoading(false);
         } catch (error) {
           console.error('Error al obtener la lista de autos:', error.message);
@@ -28,9 +32,9 @@ const ThirdPage = () => {
           setLoading(false);
         }
       };
-    
+  
       fetchData();
-    }, []);
+    },[] );
     
 return (
     <>
@@ -42,14 +46,13 @@ return (
         <div className='image-overlay'></div>
       </div>
       <div className='relative p-10'>
-        {loading ? (
-          <div className="loader-container">
-            <BarLoader color="#3498db" loading={loading} height={8} width={200} />
+      {error? (<p className='w-full text-center font-semibold text-red-500'>{error}</p>):(carro? (
+        <Cards carro={carro}/>):(
+          <div className='w-full flex justify-center'>
+          <BarLoader color="#3498db" loading={loading} height={8} width={200}/>
           </div>
-        ) : (
-          <Cards carro={carro} />
+        )
         )}
-        {error && <p>Error: {error}</p>}
       </div>
     </>
   );

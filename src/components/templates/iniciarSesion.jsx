@@ -88,13 +88,14 @@ const IniciarSesion = () => {
     email: '',
     contraseña: '',
   });
-  const [error, seterror]=useState(null);
+  const [error, setError]=useState(null);
+  const[errorLogin, setErrorLogin]=useState(null)
   const handleInputChange = (e, formType) => {
     const targetForm = formType === 'registro' ? setFormData : setLoginFormData;
     targetForm((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
   };
   const handleLogin = async () => {
-    seterror(null)
+    setError(null)
     try {
       const respuesta = await fetch('http://localhost:9000/iniciar', {
         method: 'POST',
@@ -116,6 +117,7 @@ const IniciarSesion = () => {
       } else {
         const error = await respuesta.json();
         console.error('Error en el inicio de sesión:', error);
+        setErrorLogin("El usuario no existe, crea un usuario para continuar")
         // Manejar errores, mostrar mensajes al usuario, etc.
       }
     } catch (error) {
@@ -124,7 +126,7 @@ const IniciarSesion = () => {
   };
 
   const handleRegistration = async () => {
-    seterror(null);
+    setError(null);
     
     try {
       console.log('Datos del formulario:', formData);
@@ -146,11 +148,11 @@ const IniciarSesion = () => {
         const error = await respuesta.json();
         console.error('Error en la solicitud:', error);
         
-          seterror('El correo electrónico ya está registrado. Por favor, elige otro.');
+          setError('El correo electrónico ya está registrado. Por favor, elige otro.');
       }
     } catch (error) {
       console.error('Error al realizar la solicitud:', error);
-      seterror('Error en el registro. Por favor, inténtalo de nuevo.');
+      setError('Error en el registro. Por favor, inténtalo de nuevo.');
     }
   };
   return (
@@ -202,6 +204,7 @@ const IniciarSesion = () => {
                        value={loginFormData.contraseña}
                        onChange={(e) => handleInputChange(e, 'login')}
                         />
+                         {errorLogin && <div className="error-message  text-red-500">{errorLogin}</div>}
                         <Button 
                         styles="text-white w-2/4 bg-red-500 h-full z-10 text-xl font-semibold"
                         text="Entrar"
