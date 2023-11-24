@@ -7,7 +7,7 @@ import github from '../../img/github.png'
 const fotter = () => {
   return (
    <>
-     <div className='flex gap-10 h-10 items-center'>
+     <div className='flex flex-wrap gap-10 h-10 items-center'>
               <Fotter
               text2="Acerca de nosotros"
               text3="atencion al cliente"
@@ -15,6 +15,7 @@ const fotter = () => {
               text="Siguenos"
               style="hover:border-b border-red-500 h-5 text-white list-none font-medium text-sm cursor-pointer first-letter:text-red-500"
               />
+              <div className='flex gap-10'>
               <Img
               style="w-10"
               image={instagram}
@@ -27,6 +28,7 @@ const fotter = () => {
               style="w-10"
               image={github}
               />
+              </div>
               </div>
    
    

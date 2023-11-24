@@ -47,7 +47,7 @@ const Header = () => {
     };
   
     return (
-      <header className={`flex justify-around items-center relative z-10`} style={headerStyle}>
+      <header className={`flex flex-wrap justify-around items-center relative z-10`} style={headerStyle}>
         <div style={backgroundStyle}></div>
         <div className='z-10 w-fit h-fit'>
         <Link to="/">
