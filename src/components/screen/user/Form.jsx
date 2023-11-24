@@ -47,7 +47,7 @@ const Form = () => {
             className="h-96 w-3/4 items-center shadow relative flex flex-col shadow-red-500 rounded-md"
             >
             <h2 className='text-xl font-bold text-center absolute w-2/4 top-0 p-2 border-b-2 border-black'>Agendar cita</h2>
-            <div className='flex flex-col w-2/3 items-center justify-center relative p-20 gap-5 '>
+            <div className='flex flex-col w-full md:w-2/4 items-center justify-center relative p-20 gap-5 '>
            <input 
            className='p-2 w-full border-black border-2 rounded shadow-xl'
            type="text" 
@@ -81,7 +81,7 @@ const Form = () => {
             </div>
           </form>
         </div>
-        <div className='h-44 w-full gap-10  fotter bottom-0 z-10 absolute flex items-center justify-around'>
+        <div className='h-96 w-full gap-10 -z-10 fotter absolute -bottom-96 flex items-center justify-around'>
                 <Fotter/>
             </div>
       </div>
