@@ -3,8 +3,9 @@ import Header from '../../oraganisms/header'; // Corregí el typo en 'organisms'
 import axios from 'axios';
 import fondo from '../../../img/deportivo.jpg'
 import Fotter from '../../oraganisms/fotter'
+import 'react-toastify/dist/ReactToastify.css';
 import validator from 'validator';
-
+import { ToastContainer, toast } from 'react-toastify';
 const Form = () => {
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
@@ -18,18 +19,18 @@ const Form = () => {
       const response = await axios.post('http://localhost:9000/agendarcita', { nombre, correo, dia });
       console.log(response.data);
       console.log("cita agendada con exito")
-      alert("Cita agendada con éxito, lindo día"); // Puedes manejar la respuesta según tus necesidades
+      toast.success("Cita agendada con éxito, lindo día" , { position: toast.POSITION.BOTTOM_RIGHT })
     } catch (error) {
       console.error('Error al agregar cita:', error.message);
   
       if (error.response) {
-        // Si la respuesta del servidor tiene un estado, puedes acceder al mensaje de error
+      
         setError(error.response.data.error || 'Error desconocido en el servidor');
       } else if (error.message) {
-        // Si no hay una respuesta del servidor, pero hay un mensaje de error en la excepción, úsalo
+        
         setError(error.message);
       } else {
-        // Si no hay un mensaje de error, muestra un mensaje genérico
+       
         setError('Error al agregar cita. Inténtalo de nuevo más tarde.');
       }
     }
@@ -85,6 +86,17 @@ const Form = () => {
                 <Fotter/>
             </div>
       </div>
+      <ToastContainer
+           position="bottom-right"
+           autoClose={2000} 
+           hideProgressBar={false} 
+           newestOnTop={false} 
+           closeOnClick={false}
+           pauseOnFocusLoss={false}
+           pauseOnHover={false}
+           rtl={false}  
+           draggable  
+          />
     </>
   );
 };
