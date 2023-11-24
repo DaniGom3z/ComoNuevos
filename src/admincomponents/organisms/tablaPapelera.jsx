@@ -4,7 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BarLoader } from 'react-spinners';
 import axios from 'axios';
-
+import eliminar from '../../img/eliminar.png'
+import recuperar from '../../img/recuperar.png'
 const TablaPapelera = ({carros}) => {
   
   const token=localStorage.getItem('token')
@@ -58,6 +59,7 @@ const TablaPapelera = ({carros}) => {
     }
   return (
    <>
+   <div className='container mx-auto mt-8 h-96 overflow-auto'>
     <table className="relative w-full top-32 bg-transparent border rounded-md">
             <thead className="bg-transparent border-b">
               <tr>
@@ -72,7 +74,7 @@ const TablaPapelera = ({carros}) => {
             </thead>
             {error ? (
               <p className="text-red-500 absolute text-center w-full top-14 ">{error}</p>
-            ) : (
+              ) : (
               <tbody>
                 {carros? (
                   carros.map((carro) => (
@@ -80,24 +82,24 @@ const TablaPapelera = ({carros}) => {
                       <td className="border ">{carro.id_auto}</td>
                       <td className="border ">{carro.nombre}</td>
                       <td className=" border  p-1 w-44"><img className='w-24 ' src={carro.imagen} alt=""/></td>
-                      <td className='  flex p-1 space-x-1 '>
+                      <td className='  flex justify-center gap-5 p-1 space-x-1 '>
                         <button
                           className="bg-red-500 font-semibold text-white p-2 rounded"
                           onClick={() => handleEliminarAutoFisicamente(carro.id_auto)}
-                        >
-                          Eliminar Permanentemente
+                          >
+                          <img className='w-10' src={eliminar} alt="" />
                         </button>
                         <button
                           className="bg-green-500 font-semibold text-white p-2 rounded"
                           onClick={() => handleRecuperarAuto(carro.id_auto)}
-                        >
-                          Restaurar Auto
+                          >
+                            <img className='w-10' src={recuperar} alt="" />
                         </button>
                       </td>
                     </tr>
                   ))
-                ) : (
-                  <tr className='flex justify-center absolute items-center text-center w-full h-full'>
+                  ) : (
+                    <tr className='flex justify-center absolute items-center text-center w-full h-full'>
                     <td>
                       <BarLoader color="blue" height={5} width={150} />
                     </td>
@@ -106,6 +108,7 @@ const TablaPapelera = ({carros}) => {
               </tbody>
             )}
           </table>
+          </div>
           <ToastContainer
            position="bottom-right"
            autoClose={2000} 

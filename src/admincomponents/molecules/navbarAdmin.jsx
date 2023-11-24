@@ -4,7 +4,7 @@ import avatar1 from "../../avatar/henry.jpg";
 import avatar2 from "../../avatar/angus.jpg";
 import user from "../../avatar/usuario.png"
 import mensajes from "../../img/enviar-mensaje.png";
-import notificaciones from "../../img/notificaciones.png";
+
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -105,28 +105,8 @@ const NavbarAdmin = () => {
   return (
     <>
       <div className="gap-10 flex items-center justify-end">
-        {/* Sección de Notificaciones */}
-        <div className="relative" ref={notificacionesRef}>
-          <button
-            onClick={toggleNotificaciones}
-            className="flex items-center space-x-4 cursor-pointer"
-          >
-            <img
-              src={notificaciones}
-              alt=""
-              className="w-7 h-7 p-1 shadow-md rounded-full bg-blue-200"
-            />
-          </button>
-          {/* Menú de notificaciones desplegable */}
-          {notificacionesAbierto && (
-            <div className="absolute top-full right-0 mt-2 w-48 bg-white shadow rounded border">
-              {/* Contenido del menú de notificaciones */}
-              <div className="p-2 border-b-2">Notificación 1</div>
-              <div className="p-2 border-b-2">Notificación 2</div>
-              {/* Puedes agregar más notificaciones aquí */}
-            </div>
-          )}
-        </div>
+       
+     
 
         {/* Sección de Mensajes */}
         <div className="relative" ref={mensajesRef}>
@@ -137,7 +117,7 @@ const NavbarAdmin = () => {
             <img
               src={mensajes}
               alt=""
-              className="w-7 h-7 p-1 shadow-md rounded-full bg-blue-200"
+              className="w-7 h-7 max-md:w-5 max-md:h-5 p-1 shadow-md rounded-full bg-blue-200"
             />
           </button>
           {/* Menú de mensajes desplegable */}
@@ -167,10 +147,10 @@ const NavbarAdmin = () => {
             onClick={toggleUsuarios}
             className="flex items-center space-x-4 cursor-pointer"
           >
-           <Avatar src={user} style/>
+           <Avatar src={user} />
           </button>
           {usuariosAbierto && (
-            <div className="absolute z-50 top-full right-0 mt-2 w-96 h-auto p-5 bg-white shadow rounded border">
+            <div className="absolute z-50 top-full right-0 mt-2 w-96 max-md:w-44 h-auto p-5 bg-white shadow rounded border">
               {usuario && (
                 <div>
                   <div><p className=" text-black font-bold">Nombre:</p>{usuario.nombre} </div>

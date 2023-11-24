@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BarLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import eliminar from '../../img/eliminar.png'
 const TablaCitas = ({citas}) => {
 
     const [error, setError] = useState(null);
@@ -40,6 +41,8 @@ const TablaCitas = ({citas}) => {
   
   return (
     <>
+    <div className='container mx-auto mt-8 h-96 overflow-auto'>
+
     <table className="relative w-full top-32 bg-transparent border rounded-md">
             <thead className="bg-transparent border-b">
               <tr>
@@ -50,13 +53,13 @@ const TablaCitas = ({citas}) => {
                 <th className="p-2 w-fit border  ">Nombre</th>
                 <th className="p-2 w-fit border  ">Correo</th>
                 <th className="p-2 w-fit border ">Día</th>
-                <th className="p-2 w-1/4 border ">Acciones</th>
+                <th className="p-2 w-fit border">Acciones</th>
               </tr>
             </thead>
             {error ? (
               <p className="text-red-500 absolute text-center w-full top-14 ">{error}</p>
-            ) : (
-              <tbody>
+              ) : (
+                <tbody>
                 {citas ? (
                   citas.map((cita) => (
                     <tr className='text-center border' key={cita.id_cita}>
@@ -64,19 +67,19 @@ const TablaCitas = ({citas}) => {
                       <td className="border ">{cita.nombre}</td>
                       <td className=" border ">{cita.correo}</td>
                       <td className="border">{new Date(cita.dia).toISOString().split('T')[0]}</td>
-                      <td className=' border flex p-1 '>
+                      <td className=' border p-1 flex items-center justify-center'>
                        
                         <button
-                          className="bg-red-500 font-semibold w-full text-white p-2 rounded"
+                          className="bg-red-500 w-fit font-semibold text-white p-2 rounded"
                           onClick={() => handleEliminarCitaLogicamente(cita.id_cita)}
-                        >
-                          Eliminar Cita
+                          >
+                          <img className='w-10' src={eliminar} alt="" />
                         </button>
                       </td>
                     </tr>
                   ))
-                ) : (
-                  <tr className='flex justify-center absolute items-center text-center w-full h-full'>
+                  ) : (
+                    <tr className='flex justify-center absolute items-center text-center w-full h-full'>
                     <td>
                       <BarLoader color="blue" height={5} width={150} />
                     </td>
@@ -85,6 +88,7 @@ const TablaCitas = ({citas}) => {
               </tbody>
             )}
           </table>
+          </div>
           <ToastContainer
            position="bottom-right"
            autoClose={2000} 
@@ -95,7 +99,7 @@ const TablaCitas = ({citas}) => {
            pauseOnHover={false}
            rtl={false} 
            draggable 
-
+           
           />
     </>
   )

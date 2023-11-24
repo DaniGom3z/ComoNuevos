@@ -5,7 +5,7 @@ const Avatar = ({ src, alt }) => {
     <img
       src={src}
       alt={alt}
-      className='w-10 h-10 p-1 shadow-md rounded-full bg-blue-200'
+      className='w-10 max-md:w-7 max-md:h-7 h-10 p-1 shadow-md rounded-full bg-blue-200'
     />
   );
 };

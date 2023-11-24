@@ -139,7 +139,7 @@ const ModalEditar = ({isOpen, onClose, carro}) => {
     overlayClassName="fixed inset-0 bg-black bg-opacity-50"
     >
         <h2 className="text-2xl -2 text-center">Editar auto</h2>
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 md:grid-cols-2 gap-2">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 h-96 overflow-y-scroll md:grid-cols-2 gap-2">
       <div className="w-full md:w-1/2 pt">
         <label>
           nombre:

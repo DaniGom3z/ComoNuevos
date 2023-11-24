@@ -9,7 +9,7 @@ const Sedanes = () => {
   const [autos, setAutos]=useState(null)
 const [error, setError]=useState(null)
 const [loading, setLoading]=useState(true)
-
+const [menu, setMenu] = useState(true);
 
   const fetchData = async () => {
 
@@ -47,13 +47,27 @@ const [loading, setLoading]=useState(true)
 useEffect(()=>{
   fetchData();
 },[] );
+const toggleMenu = () => {
+  setMenu(!menu);
+};
+
+const abrirMenu = () => {
+  setMenu(!menu);
+};
+
   return (
     <>
-          <div className='flex w-screen justify-between flex-row-reverse items-center relative colorAdmin h-screen'>
-    <header className='w-full relative h-full'>
+        <div className='flex w-screen justify-between  flex-row-reverse items-center relative colorAdmin h-screen'>
+    <header className='w-full relative h-full '>
      <div className='w-full absolute top-0'>
-       <Header/>
-       <article className='relative top-32 pl-5 '>
+     <Header
+        id="abrirMenu"
+        onClick={toggleMenu}
+        menu={menu}
+      />
+            
+      
+       <article className='relative  top-32 pl-5 '>
           {error? (<p className='text-red-500'>{error}</p>):(autos ? (
             <Tabla text="Lista De Pick Ups" autos={autos}/>
             ):(<BarLoader color="blue" height={5} width={150}/>)
@@ -62,9 +76,15 @@ useEffect(()=>{
        </article>
      </div>
     </header>
-    <aside className='left-0 '>
-          <Sidebar/>
-        </aside>
+    <aside className={`left-0 absolute transition-transform duration-300 ease-in-out transform ${menu ? 'translate-x-0' : '-translate-x-full'}`}>
+        {menu && (
+          <Sidebar
+            onClick={abrirMenu}
+            style="w-5 absolute right-10 top-7 t z-10 "
+            id="cerrarMenu"
+          />
+        )}
+      </aside>
           
       </div>
     </>

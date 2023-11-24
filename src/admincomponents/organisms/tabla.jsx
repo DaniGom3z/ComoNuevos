@@ -4,9 +4,11 @@ import axios from 'axios';
 import ModalEditar from './modalEditar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import editar from '../../img/editar.png'
+import eliminar from '../../img/eliminar.png'
 const Tabla = ({ text, autos }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [error, setError] = useState(null);
+ 
 
   const [modalEditarIsOpenArray, setModalEditarIsOpenArray] = useState(Array(autos.length).fill(false));
 
@@ -20,6 +22,7 @@ const Tabla = ({ text, autos }) => {
             Authorization: token,
           },
         });
+        
         console.log('eliminacion exitosa', response.data);
         toast.success('se elimino correctamente',{ position: toast.POSITION.BOTTOM_RIGHT });
         
@@ -34,13 +37,13 @@ const Tabla = ({ text, autos }) => {
         console.error('respuesta del servidor', error.response.data);
       }
     }
-    setError('hubo un problema al eliminar los datos');
+    
   };
 
   return (
     <>
     
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 h-96 overflow-y-scroll">
       <h1 className="text-2xl font-bold mb-4">{text}</h1>
 
       <div className="mb-4">
@@ -70,7 +73,7 @@ const Tabla = ({ text, autos }) => {
                 </td>
                 <td className="border p-2 flex">
                   <button
-                    className="bg-yellow-500 text-white p-2 rounded mr-2"
+                    className="bg-green-300 text-white p-2 rounded mr-2"
                     onClick={() => {
                       // Actualizar el estado del modal de edición específico
                       const newModalEditarIsOpenArray = [...modalEditarIsOpenArray];
@@ -78,12 +81,12 @@ const Tabla = ({ text, autos }) => {
                       setModalEditarIsOpenArray(newModalEditarIsOpenArray);
                     }}
                   >
-                    Editar
+                    <img className='w-10' src={editar} alt="" />
                   </button>
                   <ModalEditar carro={carro} isOpen={modalEditarIsOpenArray[index]} onClose={() => setModalEditarIsOpenArray(new Array(autos.length).fill(false))} />
-                  <button className="bg-red-500 text-white p-2 rounded" onClick={() => handleEliminarFisicamente(carro.id_auto)}>
-                    Eliminar
-                  </button>
+                  {<button className="bg-red-500 text-center text-white p-2 rounded" onClick={() => handleEliminarFisicamente(carro.id_auto)}>
+                  <img className='w-10' src={eliminar} alt="" />
+                  </button>}
                 </td>
               </tr>
             ))}

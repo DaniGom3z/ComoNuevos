@@ -134,12 +134,12 @@ const ModalAgregarAuto = ({ isOpen, onClose }) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel="Modal para agregar auto"
-      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-md shadow-md"
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 overflow-auto -translate-y-1/2 bg-white p-8 rounded-md shadow-md"
       overlayClassName="fixed inset-0 bg-black bg-opacity-50"
     >
       <h2 className="text-2xl -2 text-center">Agregar Auto</h2>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 h-96 overflow-y-scroll md:grid-cols-2 gap-2">
       <div className="w-full md:w-1/2 pt">
         <label>
           nombre:
