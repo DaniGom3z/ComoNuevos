@@ -6,7 +6,6 @@ import flecha from '../../img/tomar.png';
 import axios from 'axios';
 
 const Cards = ({ carro, setCurrentPage, currentPage, pageSize }) => {
-  const [carDetails, setCarDetails] = useState([]);
   const [loadingDetails, setLoadingDetails] = useState(false);
 
   const mostrar = () => {
@@ -21,39 +20,7 @@ const Cards = ({ carro, setCurrentPage, currentPage, pageSize }) => {
     document.getElementById('cerrar').style.display = 'none';
   };
 
-  useEffect(() => {
-    const fetchData = async (id_auto) => {
-      try {
-        const response = await axios.get(`http://localhost:9000/autos/${id_auto}`);
-
-        if (response.status >= 200 && response.status < 300) {
-          const carDetail = response.data;
-          setCarDetails((prevDetails) => [...prevDetails, carDetail]);
-        } else {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error('Error en la solicitud Axios:', error);
-        throw error;
-      }
-    };
-
-    const fetchDetailsForAllCars = async () => {
-      setLoadingDetails(true);
-
-      try {
-        await Promise.all(carro.map((auto) => fetchData(auto.id_auto)));
-      } catch (error) {
-        console.error('Error al obtener detalles de autos:', error);
-      } finally {
-        setLoadingDetails(false);
-      }
-    };
-
-    if (carro.length > 0) {
-      fetchDetailsForAllCars();
-    }
-  }, [carro]);
+ 
 
  
 
@@ -89,7 +56,7 @@ const Cards = ({ carro, setCurrentPage, currentPage, pageSize }) => {
                   name={auto.nombre}
                   price={auto.precio}
                   imagenFrontal={auto.imagen}
-                  details={carDetails.find((detail) => detail.id_auto === auto.id_auto)}
+                 
                   url={`/pageInfo/${auto.id_auto}`}
                 />
               ))}
@@ -101,14 +68,14 @@ const Cards = ({ carro, setCurrentPage, currentPage, pageSize }) => {
           )}
           <div className='flex justify-center mt-16'>
                     <button
-            className='bg-slate-500 rounded p-2 mx-2'
+            className='rounded bg-blue-gray-600 p-2 mx-2'
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
             Anterior
           </button>
           <button
-            className='bg-slate-500 rounded p-2 mx-2'
+            className='bg-blue-gray-600 rounded p-2 mx-2'
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages || (currentPage * pageSize >= carro.length)}
           >

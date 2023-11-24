@@ -9,11 +9,14 @@ import axios from 'axios'
 import { BarLoader } from 'react-spinners'
 
 const HomeScreen = () => {
-const [carro,setCarro]=useState(null)
-const [loading, setLoading] = useState(true);
+  
+  const [carro,setCarro]=useState(null)
+const [loading, setLoading]=useState(false)
 const [error,setError]=useState(null);
 const [currentPage, setCurrentPage] = useState(1);
 const pageSize = 2; 
+
+
 useEffect(() => {
   const seccionesOcultas = document.querySelectorAll('.hide');
 
@@ -38,7 +41,6 @@ useEffect(() => {
 }, []); 
 useEffect(() => {
   const seccionesOcultas = document.querySelectorAll('.hide3');
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       entry.target.classList.toggle('show3', entry.isIntersecting);
@@ -47,36 +49,33 @@ useEffect(() => {
 
   seccionesOcultas.forEach((seccion) => observer.observe(seccion));
 }, []); 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://localhost:9000/autos", {
-        params: {
-          page: currentPage,
-          pageSize,
-        },
-      });
-      const data = await response.data;
 
-      if (data.length === 0) {
-        setError("No tenemos autos disponibles");
-        setLoading(false);
+useEffect(()=>{
+const fechData =async()=>{
+  try{
+    const response =await axios.get('http://localhost:9000/autos',{
+      params:{
+        currentPage,
+        pageSize,
+        sort:"nombre",
+        order:"asc"
+      },
+    })
+
+    const noEliminados= response.data.filter(data=> data.eliminada_logicamente===0)
+    setCarro(noEliminados)
+  }catch(error){
+      console.error("error", error.message)
+
+      if(error.response){
+        console.log("respuesta del seridor", error.response)
       }
+  }
+}
 
-      const noEliminadoLogicamente = data.filter(
-        (car) => car.eliminada_logicamente === 0
-      );
-      setCarro(noEliminadoLogicamente);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error al obtener la lista de autos:", error.message);
-      setError("Hubo un problema al cargar los datos.");
-      setLoading(false);
-    }
-  };
+fechData()
+},[])
 
-  fetchData();
-}, [currentPage, pageSize]);
 
 
   return (
@@ -99,7 +98,7 @@ useEffect(() => {
       </div>
          <div className='contenedor gap-20 border-b border-red-100 relative w-full flex flex-col items-center justify-center '>
          <VentaCarros/>
-            <div className='h-96 w-full gap-10 -z-10 bg-zinc-950 absolute -bottom-96 flex items-center justify-around'>
+            <div className='h-96 w-full gap-10 -z-10 fotter absolute -bottom-96 flex items-center justify-around'>
                 <Fotter/>
             </div>
          </div>

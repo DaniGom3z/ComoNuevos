@@ -1,13 +1,18 @@
 import React from 'react'
 import HomeScreen from '../../templates/homeScreen'
-const page = () => {
+import axios from 'axios'
+
+const Page = () => {
+
+
+
   return (
     <>
     <div className='h-screen'>
-    <HomeScreen/>  
+    <HomeScreen />  
     </div>
     </>
   )
 }
 
-export default page
+export default Page

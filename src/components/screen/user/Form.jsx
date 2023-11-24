@@ -81,7 +81,7 @@ const Form = () => {
             </div>
           </form>
         </div>
-        <div className='h-44 w-full gap-10  bg-zinc-950 bottom-0 z-10 absolute flex items-center justify-around'>
+        <div className='h-44 w-full gap-10  fotter bottom-0 z-10 absolute flex items-center justify-around'>
                 <Fotter/>
             </div>
       </div>
