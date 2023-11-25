@@ -19,7 +19,7 @@ const [menu, setMenu] = useState(true);
       
         if(tokenAlmacenado){
 
-          const response = await axios.get("http://localhost:9000/auto?tipo=pick%20up", {
+          const response = await axios.get("http://localhost:9000/auto?tipo=pick%20up&perPage=100", {
             headers: {
               Authorization: tokenAlmacenado
             },

@@ -22,7 +22,7 @@ const fetchData = async () => {
           const tokenAlmacenado = localStorage.getItem('token');
 
               if(tokenAlmacenado){
-                  const response = await axios.get("http://localhost:9000/auto?tipo=deportivo", {
+                  const response = await axios.get("http://localhost:9000/auto?tipo=deportivo&perPage=100", {
                       headers: {
                         Authorization: tokenAlmacenado
                       },

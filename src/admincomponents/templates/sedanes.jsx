@@ -20,7 +20,7 @@ useEffect(() => {
       const tokenAlmacenado = localStorage.getItem('token');      
         if(tokenAlmacenado){
 
-          const response = await axios.get("http://localhost:9000/auto?tipo=sedan", {
+          const response = await axios.get("http://localhost:9000/auto?tipo=sedan&perPage=100", {
             headers: {
               Authorization: tokenAlmacenado
             },
