@@ -56,7 +56,7 @@ const fechData =async()=>{
   try{
     const response =await axios.get('http://localhost:9000/autos',{
       params:{
-        currentPage,
+        page: currentPage,
         pageSize,
         sort:"nombre",
         order:"asc"
@@ -75,8 +75,7 @@ const fechData =async()=>{
 }
 
 fechData()
-},[])
-
+}, [currentPage, pageSize]);
 
 
   return (
