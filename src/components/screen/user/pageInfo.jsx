@@ -34,19 +34,22 @@ const PageInfo = () => {
     <>
     {carro &&
     <div className='min-h-screen h-screen min-w-screen carro'>
-      <Header/>
+       <div className='  relative flex justify-center z-20 w-full'>
+         <Header />  
+         <span className='absolute -bottom-0.5 bg-red-500 w-3/4 h-0.5'></span>
+         </div>
     <div>
-      <Img style="absolute top-0 h-full w-full" image={fondo}/>
+      <Img style="absolute object-cover top-0 h-full w-full" image={fondo}/>
     </div>
-    <div className='flex justify-end  flex-col relative  top-16 items-center bg-opacity-40 bg-slate-700 shadow-sm border-t-2 border-gray-100 border-b-2 h-3/4 '>
+    <div className='flex justify-end  flex-col relative  top-20 items-center bg-opacity-40 bg-gray-900 shadow-sm   h-3/4 '>
      
       <div className='flex items-center justify-center'>
       <CarouselDefault  imagenFrontal={carro.imagenFrontal} imagenLateral={carro.imagenLateral} imagenInterior={carro.imagenInterior}/>
       </div> 
-      <Title styles="pt-5 text-white font-semibold w-2/4 text-center border-b-2 first-letter:text-red-500 text-2xl" text="DETALLES DEL AUTO"/>
+      <Info styles="text-white text-sm md:text-xl " text={carro.nombre}/>
+     
     <div className=' flex justify-around text-sm md:text-xl font-semibold items-end text-white w-full h-fit '>
       <div className='md-w-52 '>
-      <Info text={"Nombre: " + carro.nombre}/>
       <Info text={"Precio : $" + carro.precio}/>
       <Info text={"Motor: " + carro.motor}/>
       <Info text={"Cilindrad en cc: " + carro.cilindrada}/>

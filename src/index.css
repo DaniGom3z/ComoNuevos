@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  font-family: pagina;
+}
+
 .banner{
   height: 120vh;
   
@@ -70,13 +74,12 @@
 }
 .hide{
   position: relative;
-  
-  left:0;
+  left:0%;
   opacity: 0;
   transition: all 1.5s ease;
 }
 .show{
-  left: 45%;
+  left: 39%;
   opacity: 1;
 }
 .hide2{
@@ -86,7 +89,7 @@
   transition: all 1.5s ease;
 }
 .show2{
-  right: -5%;
+  right: -11%;
   opacity: 1;
 }
 .hide3{
@@ -96,7 +99,7 @@
   transition: all 1.5s ease;
 }
 .show3{
- left: 45%;
+ left: 39%;
   opacity: 1;
 }
 .contenedor{
@@ -112,6 +115,10 @@ padding-bottom: 200px;
   font-family: "titulo";
   src: url("./font/coolvetica\ rg.otf");
 }
+@font-face {
+  font-family: "pagina";
+  src: url("../src/font/Quicksand-Italic.otf");
+}
 .titulo{
   font-family: "titulo";
 }
@@ -119,8 +126,16 @@ padding-bottom: 200px;
 .fotter{
   background-color: rgb(22, 22, 29);
 }
+.divInfo{
+  border-radius: 100px 0px 0px 10px;
+}
 
-
-
+.columnas{
+  grid-template-columns: 2fr 1fr;
+  
+}
+.pagina{
+  font-family: pagina;
+}
 
 

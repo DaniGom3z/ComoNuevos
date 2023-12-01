@@ -40,12 +40,15 @@ const Form = () => {
   return (
     <>
       <div className="h-screen">
-        <Header />
+      <div className='fixed flex justify-center z-20 w-full'>
+         <Header />  
+         <span className='absolute -bottom-0.5 bg-red-500 w-3/4 h-0.5'></span>
+         </div>
         <div className="flex justify-center  h-3/4 items-center">
           <img src={fondo} className='-z-10 absolute w-full h-full top-0' />
           <form
             onSubmit={handleSubmit}
-            className="h-96 w-3/4 items-center shadow relative flex flex-col shadow-red-500 rounded-md"
+            className="h-96 w-3/4 items-center shadow relative top-20 flex flex-col shadow-red-500 rounded-md"
             >
             <h2 className='text-xl font-bold text-center absolute w-2/4 top-0 p-2 border-b-2 border-black'>Agendar cita</h2>
             <div className='flex flex-col w-full md:w-2/4 items-center justify-center relative p-20 gap-5 '>

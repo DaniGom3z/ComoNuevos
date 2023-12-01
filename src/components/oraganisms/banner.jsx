@@ -5,6 +5,7 @@ const organismsBanner = ({image,style}) => {
    <>
    <div >
    <Banner style={style} image={image}/>
+   
    </div>
    </>
   )

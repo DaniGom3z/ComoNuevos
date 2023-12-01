@@ -26,7 +26,7 @@ const Header = () => {
     };
   
     const headerStyle = {
-        background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))',
+        background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.76), rgba(0, 0, 0, .1))',
         height:'70px'
     };
   
@@ -47,13 +47,15 @@ const Header = () => {
     };
   
     return (
-      <header className={`flex flex-wrap justify-around items-center relative z-10`} style={headerStyle}>
+      <header className={`flex flex-wrap w-full justify-around items-center relative z-10`} style={headerStyle}>
         <div style={backgroundStyle}></div>
-        <div className='z-10 w-fit h-fit'>
+        <div className='z-10 w-fit h-fit '>
         <Link to="/">
         <Title
-          styles={`text-white font-semibold first-letter:text-red-500`}
-          text="ComoNuevo"
+          styles={`text-white font-semibold text-red-800`}
+          style2="text-white"
+          text="Como"
+          text2="Nuevos"
           style={titleStyle}
           />
           </Link>
@@ -61,9 +63,6 @@ const Header = () => {
         <Navbar
         style="z-10"
         />
-        <div className='z-10'>
-      
-        </div>
       </header>
     );
 }

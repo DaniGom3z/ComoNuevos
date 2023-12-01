@@ -1,9 +1,9 @@
 import React from 'react'
 
-const title = ({text, styles}) => {
+const title = ({text, styles,text2,style2}) => {
   return (
    <>
-   <h2 className={styles}>{text}</h2>
+   <h2 className={styles}>{text}<span className={style2}>{text2}</span></h2>
    </>
   )
 }

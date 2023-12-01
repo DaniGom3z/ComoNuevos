@@ -4,7 +4,7 @@ import Informacion from './informacion'
 const carroVenta = ({text, text2}) => {
   return (
     <>
-    <div className='flex w-2/4 justify-center text-center'>
+    <div className='flex text-sm md:text-base w-1/3 justify-center text-center'>
     <Informacion
      text={text}
      text2={text2}

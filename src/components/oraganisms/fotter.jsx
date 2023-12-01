@@ -7,7 +7,7 @@ import github from '../../img/github.png'
 const fotter = () => {
   return (
    <>
-     <div className='flex flex-wrap gap-10 h-10 items-center'>
+     <div className='flex flex-wrap justify-center gap-10 h-10 items-center'>
               <Fotter
               text2="Acerca de nosotros"
               text3="atencion al cliente"
